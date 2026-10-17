@@ -153,8 +153,8 @@ apps=(
     "com.google.android.apps.youtube.music"
 
     # Chrome
-    "com.android.chrome"
-    "com.google.android.apps.chrome"
+    #"com.android.chrome"
+    #"com.google.android.apps.chrome"
 
     # Google Pay
     "com.google.android.apps.walletnfcrel"
@@ -216,7 +216,7 @@ apps=(
     "com.coloros.phonemanager"
     "com.oplus.phoneactivation"
     "com.oplus.batterywarning"
-    "com.oppo.engineermode"
+    #"com.oppo.engineermode"
     "com.oppo.engineermode.camera"
     "com.oppo.engineermode.network"
     "com.oppo.quicksearchbox"
@@ -231,9 +231,9 @@ apps=(
     "com.android.overlay.camera2"
     "com.android.partnerbrowsercustomizations.example"
     "com.android.egg"
-    "com.android.bluetoothmidiservice"
-    "com.android.overlay.emergency"
-    "com.android.simappdialog"
+    #"com.android.bluetoothmidiservice"
+    #"com.android.overlay.emergency"
+    #"com.android.simappdialog"
     "com.igg.android.lordsmobile"
     "com.zhiliaoapp.musically" # вроде тик ток
     "ru.ivi.client"
@@ -243,7 +243,7 @@ apps=(
     "com.miui.notes"
     "com.miui.videoplayer"
     "com.miui.screenrecorder"
-    "com.android.providers.downloads.ui"
+    #"com.android.providers.downloads.ui"
     "com.xiaomi.glgm"
     "com.netflix.mediaclient"
     "miui.weather2"
@@ -251,8 +251,34 @@ apps=(
     "com.xiaomi.mipicks"
     "com.mi.globalbrowser"
     "com.mi.android.globalFileexplorer"
-    "com.miui.securitycenter"
     "com.miui.weather2"
+
+    # Фигня от Honor
+    "com.hihonor.game.kitserver"
+    "com.hihonor.gamecenter"
+    "com.hihonor.gameassistant"
+    "com.hihonor.email"
+    "com.hihonor.notepad"
+    "com.hihonor.photos"
+    "com.hihonor.hnmusicplayer"
+    "com.hihonor.calculator"
+    "hihonor.photos"
+    "com.hihonor.printservice"
+    "com.hihonor.hnoffice"
+    "com.hihonor.appmarket"
+    "com.hihonor.remotepassword"
+    "com.hihonor.screenrecorder"
+    #"com.hihonor.brain"
+    "com.hihonor.iconnect"
+    "com.hihonor.videoeditor"
+    "com.hihonor.assistant"
+    #"com.hihonor.autoinstallapkfrommcc"
+    "com.hihonor.hnvideoplayer"
+    "com.hihonor.filemanager"
+    "com.hihonor.associateassistant"
+    "com.hihonor.health"
+    "com.hihonor.gamecenter"
+    "com.hihonor.calendar"
 )
 
 total=${#apps[@]}
@@ -260,7 +286,7 @@ success=0
 failed=0
 
 echo "=========================================="
-echo "Удаление ненужных приложений v 0.1.0 Beta"
+echo "Удаление ненужных приложений v 0.2.0 Beta"
 echo "Всего приложений: $total"
 echo "=========================================="
 echo ""
