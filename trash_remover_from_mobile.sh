@@ -20,21 +20,17 @@ apps=(
     # Google (реклама и отслеживание)
     "com.google.android.apps.wellbeing"
     "com.google.android.feedback"
-    "com.google.android.gms.location.history"
     "com.google.android.apps.searchlite"
     "com.google.android.apps.restore"
-    "com.google.android.gms"
+    "com.google.android.gms" # Google сервисы
     "com.google.android.androidquicksearchbox"
     "com.google.android.apps.maps"
     "com.google.android.apps.docs"
-    "com.google.android.apps.photos"
-    "com.google.android.apps.mediashell"
     "com.google.android.apps.messaging"
     "com.google.android.apps.tachyon"
     "com.google.android.apps.googleassistant"
     "com.google.android.apps.genie.geniewidget"
     "com.google.android.apps.subscriptions.red"
-    "com.google.android.apps.youtube.music"
     "com.google.android.youtube"
     "com.google.android.apps.youtube.kids"
     "com.google.android.apps.fitness"
@@ -54,7 +50,7 @@ apps=(
     "com.google.android.gms.setup"
     "com.google.android.gms.supervision"
     "com.google.android.googlequicksearchbox"
-    "com.google.android.inputmethod.latin"
+    #"com.google.android.inputmethod.latin" # Клавиатура
     "com.google.android.marvin.talkback"
     "com.google.android.projection.gearhead"
     "com.google.android.soundpicker"
@@ -85,10 +81,6 @@ apps=(
     "com.google.android.gms.location"
     "com.google.android.gms.location.history"
     "com.google.android.gms.location.history_service"
-    "com.google.android.gms.policy_sidecar_aps"
-    "com.google.android.gms.policy_sidecar_as"
-    "com.google.android.gms.setup"
-    "com.google.android.gms.supervision"
     "com.google.android.gms.wearable"
     "com.google.android.gms.wearable.app"
     "com.google.android.gms.wearable.service"
@@ -153,8 +145,8 @@ apps=(
     "com.google.android.apps.youtube.music"
 
     # Chrome
-    #"com.android.chrome"
-    #"com.google.android.apps.chrome"
+    "com.android.chrome"
+    "com.google.android.apps.chrome"
 
     # Google Pay
     "com.google.android.apps.walletnfcrel"
@@ -163,11 +155,12 @@ apps=(
     "com.google.android.gms.wallet"
     "com.google.android.gms.payments"
     "com.google.android.apps.paidtasks"
+
+    # Google Play
     "com.android.vending"
 
     # Google Play Фильмы
     "com.google.android.videos"
-    "com.google.android.apps.mediashell"
 
     # WhatsApp
     "com.whatsapp"
@@ -246,7 +239,6 @@ apps=(
     #"com.android.providers.downloads.ui"
     "com.xiaomi.glgm"
     "com.netflix.mediaclient"
-    "miui.weather2"
     "com.miui.player"
     "com.xiaomi.mipicks"
     "com.mi.globalbrowser"
@@ -277,42 +269,128 @@ apps=(
     "com.hihonor.filemanager"
     "com.hihonor.associateassistant"
     "com.hihonor.health"
-    "com.hihonor.gamecenter"
     "com.hihonor.calendar"
 )
+
+# Конфигурация
+KEEP_DATA=false # true = сохранять данные приложения (-k флаг)
+if [ "$1" == "1" ]; then
+    KEEP_DATA=true
+fi
+VERBOSE=false # Выводить дополнительную информацию
+if [ "$2" == "1" ]; then
+    VERBOSE=true
+USER_ID=$(($3)) # ID пользователя для удаления
+fi
+
+# Справка по параметрам
+if [ "$1" == "-h" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" == "--help" ]; then
+    echo "|=======================================================|"
+    echo '|Справка по параметрам "скрипта Удаление хлама с мобилы"|'
+    echo "|=======================================================|"
+    echo ""
+    echo "Параметры:"
+    echo "  KEEP_DATA   - Сохранять данные приложения (0/1, по умолчанию: 0)"
+    echo "  VERBOSE     - Выводить дополнительную информацию (0/1, по умолчанию: 0)"
+    echo "  USER_ID     - ID пользователя для удаления (по умолчанию: 0)"
+    echo ""
+    echo "Пример: this_script.sh 0 1 0"
+    echo ""
+    echo "Флаги справки:"
+    echo "  -h, --h, -help, --help - Вывести эту справку"
+    echo ""
+    exit 0
+fi
+
+# Проверка установки adb
+if ! command -v adb &> /dev/null; then
+    echo "[!] Ошибка - Установите Android SDK Platform Tools (adb)"
+    exit 1
+fi
+
+devices=$(adb devices 2>/dev/null | grep -c "device$")
+
+# Проверка подключения устройств
+if [ "$devices" -eq 0 ]; then
+    echo "[!] Ошибка: устройство Android не подключено! Подключите устройство через USB и включите режим отладки"
+    exit 1
+fi
+
+if [ "$devices" -gt 1 ]; then
+    echo "[!] Внимание: подключено несколько устройств! Удаление будет происходить на первом попавшемся устройстве!"
+    exit 1
+fi
 
 total=${#apps[@]}
 success=0
 failed=0
+not_installed=0
 
 echo "=========================================="
-echo "Удаление ненужных приложений v 0.2.0 Beta"
-echo "Всего приложений: $total"
+echo "Удаление ненужных приложений v 0.3.7 Beta"
+echo "Всего приложений для удаления: $total"
+#echo "Сохранять данные приложений: $KEEP_DATA"
 echo "=========================================="
 echo ""
 
-for app in "${apps[@]}"; do
-    if [ -n "$app" ]; then
-        echo -n "Удаляю: $app ... "
+# Получаем список установленных пакетов один раз и кешируем
+[[ "$VERBOSE" == true ]] && echo ">Получаем список установленных приложений..."
+packages_list=$(adb shell pm list packages 2>/dev/null)
 
-        # Проверяем, установлено ли приложение
-        if adb shell pm list packages | grep -q "^package:$app$"; then
-            if adb shell cmd package uninstall -k --user 0 "$app" 2>/dev/null | grep -q "Success"; then
-                echo "[>] OK"
-                ((success++))
-            else
-                echo "[!] ОШИБКА"
-                ((failed++))
-            fi
-        else
-            echo "[*] Не установлено"
+if [ -z "$packages_list" ]; then
+    echo "[!] Ошибка: не удалось получить список приложений."
+    exit 1
+fi
+
+[[ "$VERBOSE" == true ]] && echo "[>] Найдено ($(echo "$packages_list" | wc -l) приложений)"
+echo ""
+
+uninstall_flag=""
+if [[ "$KEEP_DATA" == true ]]; then
+    uninstall_flag="-k"
+fi
+
+for app in "${apps[@]}"; do
+    # Пропускаем пустые строки
+    if [ -z "$app" ]; then
+        continue
+    fi
+
+    echo -n "[>] Удаляем: $app ... "
+
+    if ! echo "$packages_list" | grep -q "^package:${app}$"; then
+        echo "[-] $app не установлен"
+        ((not_installed++))
+        continue
+    fi
+
+    uninstall_output=$(adb shell cmd package uninstall $uninstall_flag --user "$USER_ID" "$app" 2>&1)
+    uninstall_exit_code=$?
+
+    # Если код 0 И поток ошибок пуст - значит всё хорошо
+    if [ $uninstall_exit_code -eq 0 ] && echo "$uninstall_output" | grep -q "Success"; then
+        echo "[>] Успех"
+        ((success++))
+    else
+        echo "[!] ОШИБКА"
+        if [[ "$VERBOSE" == true ]]; then            
+            echo "    Вывод: $uninstall_output"
         fi
+        ((failed++))
     fi
 done
 
 echo ""
 echo "=========================================="
-echo "Результаты:"
-echo "Успешно удалено: $success"
-echo "Ошибок: $failed"
+echo "[>] Результаты:"
+echo "   [>] Успешно удалено: $success"
+echo "   [-] Не установлено: $not_installed"
+echo "   [!] Ошибок: $failed"
 echo "=========================================="
+
+# Возвращаем код ошибки если были ошибки
+if [ $failed -gt 0 ]; then
+    exit 1
+fi
+
+exit 0
