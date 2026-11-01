@@ -1,8 +1,6 @@
 #!/bin/bash
 
 apps=(
-    "com.google.android.calendar"
-    "com.android.providers.calendar"
     "com.android.emergency"
 
     "com.google.android.as"
@@ -206,6 +204,8 @@ apps=(
     "com.oppo.engineermode.network"
 
     # Другое ненужное ПО
+    "com.google.android.calendar"
+    "com.android.providers.calendar"
     "com.coloros.phonemanager"
     "com.oplus.phoneactivation"
     "com.oplus.batterywarning"
@@ -224,19 +224,18 @@ apps=(
     "com.android.overlay.camera2"
     "com.android.partnerbrowsercustomizations.example"
     "com.android.egg"
-    #"com.android.bluetoothmidiservice"
-    #"com.android.overlay.emergency"
-    #"com.android.simappdialog"
     "com.igg.android.lordsmobile"
     "com.zhiliaoapp.musically" # вроде тик ток
     "ru.ivi.client"
     "com.kms.free"
+    #"com.android.bluetoothmidiservice"
+    #"com.android.overlay.emergency"
+    #"com.android.simappdialog"
 
     # Фигня от xiomi
     "com.miui.notes"
     "com.miui.videoplayer"
     "com.miui.screenrecorder"
-    #"com.android.providers.downloads.ui"
     "com.xiaomi.glgm"
     "com.netflix.mediaclient"
     "com.miui.player"
@@ -244,6 +243,7 @@ apps=(
     "com.mi.globalbrowser"
     "com.mi.android.globalFileexplorer"
     "com.miui.weather2"
+    #"com.android.providers.downloads.ui"
 
     # Фигня от Honor
     "com.hihonor.game.kitserver"
@@ -260,16 +260,16 @@ apps=(
     "com.hihonor.appmarket"
     "com.hihonor.remotepassword"
     "com.hihonor.screenrecorder"
-    #"com.hihonor.brain"
     "com.hihonor.iconnect"
     "com.hihonor.videoeditor"
     "com.hihonor.assistant"
-    #"com.hihonor.autoinstallapkfrommcc"
     "com.hihonor.hnvideoplayer"
     "com.hihonor.filemanager"
     "com.hihonor.associateassistant"
     "com.hihonor.health"
     "com.hihonor.calendar"
+    #"com.hihonor.brain"
+    #"com.hihonor.autoinstallapkfrommcc"
 )
 
 # Конфигурация
@@ -285,18 +285,18 @@ fi
 
 # Справка по параметрам
 if [ "$1" == "-h" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" == "--help" ]; then
-    echo "|=======================================================|"
-    echo '|Справка по параметрам "скрипта Удаление хлама с мобилы"|'
-    echo "|=======================================================|"
+    echo "====================================="
+    echo 'Справка по trash_remover_from_mobile'
+    echo "====================================="
     echo ""
     echo "Параметры:"
-    echo "  KEEP_DATA   - Сохранять данные приложения (0/1, по умолчанию: 0)"
-    echo "  VERBOSE     - Выводить дополнительную информацию (0/1, по умолчанию: 0)"
-    echo "  USER_ID     - ID пользователя для удаления (по умолчанию: 0)"
+    echo "  KEEP_DATA - Сохранять данные приложения (0/1, по умолчанию: 0)"
+    echo "  VERBOSE - Выводить дополнительную информацию (0/1, по умолчанию: 0)"
+    echo "  USER_ID - ID пользователя для удаления (по умолчанию: 0)"
     echo ""
     echo "Пример: this_script.sh 0 1 0"
     echo ""
-    echo "Флаги справки:"
+    echo "Флаги:"
     echo "  -h, --h, -help, --help - Вывести эту справку"
     echo ""
     exit 0
@@ -327,7 +327,7 @@ failed=0
 not_installed=0
 
 echo "=========================================="
-echo "Удаление ненужных приложений v 0.3.7 Beta"
+echo "Удаление ненужных приложений v 0.3.8 Beta"
 echo "Всего приложений для удаления: $total"
 #echo "Сохранять данные приложений: $KEEP_DATA"
 echo "=========================================="
