@@ -205,6 +205,13 @@ apps=(
 
     # Другое ненужное ПО
     "com.google.android.calendar"
+    "com.android.thememanager"
+    "com.android.thememanager.module"
+    "com.android.mms"
+    "com.android.contacts"
+    "com.android.deskclock"
+    "com.android.email"
+    "com.android.calendar"
     "com.android.providers.calendar"
     "com.coloros.phonemanager"
     "com.oplus.phoneactivation"
@@ -233,6 +240,76 @@ apps=(
     #"com.android.simappdialog"
 
     # Фигня от xiomi
+    # Телеметрия и аналитика Xiaomi
+    "com.miui.analytics"
+    "com.xiaomi.joyose"
+    "com.xiaomi.mirecycle"
+
+    # Реклама и рекомендации
+    "com.miui.msa.global"
+    "com.miui.android.fashiongallery"
+    "com.mi.android.globalminusscreen"
+    "com.miui.hybrid"
+    "com.miui.hybrid.accessory"
+    "com.xiaomi.discover"
+    "com.miui.smsextra"
+
+    # Дубли и сторонний софт
+    "com.touchtype.swiftkey"
+    "com.swiftkey.swiftkeyconfigurator"
+    "com.swiftkey.languageprovider"
+    "org.pocketworkstation.pckeyboard"
+    "com.amaze.filemanager"
+    "cn.wps.xiaomi.abroad.lite"
+    "systems.sieber.vscreensaver"
+    "com.github.cvzi.screenshottile"
+    "com.android.browser"
+    "com.lbe.security.miui"
+
+    # Переводчики, облака, очистка, мелочи Xiaomi
+    "com.miui.translation.kingsoft"
+    "com.miui.translation.youdao"
+    "com.miui.translation.xmcloud"
+    "com.miui.translationservice"
+    "com.miui.cleanmaster"
+    "com.miui.cloudbackup"
+    "com.miui.yellowpage"
+    "com.xiaomi.midrop"
+    "com.miui.userguide"
+    "com.miui.miwallpaper"
+    "com.miui.touchassistant"
+    "com.xiaomi.powerchecker"
+    "com.miui.freeform"
+    "com.miui.compass"
+    "com.miui.fm"
+    "com.miui.fmservice"
+    "com.miui.calculator"
+    "com.miui.cloudservice"
+    "com.miui.miservice"
+
+    # Тестовые и sample-пакеты
+    "com.android.cts.ctsshim"
+    "com.android.cts.priv.ctsshim"
+    "com.mi.AutoTest"
+    "com.stability.camerastability"
+    "com.qualcomm.qti.auth.sampleextauthservice"
+    "com.qualcomm.qti.auth.sampleauthenticatorservice"
+    "com.qualcomm.qti.auth.securesampleauthservice"
+    "com.qualcomm.qti.RIDL"
+
+    # Оператор, регион, редко используемое
+    "com.qualcomm.qti.telephony.vodafonepack"
+    "com.micredit.in"
+    "com.mipay.wallet.in"
+    "com.qualcomm.embms"
+    "com.qualcomm.qti.CdmaCallOptions"
+    "com.dsi.ant.server"
+    "com.qualcomm.wfd.service"
+    "com.google.android.printservice.recommendation"
+    "com.google.android.partnersetup"
+    "com.android.dreams.phototable"
+    "com.android.wallpaper.livepicker"
+
     "com.miui.notes"
     "com.miui.videoplayer"
     "com.miui.screenrecorder"
@@ -243,7 +320,12 @@ apps=(
     "com.mi.globalbrowser"
     "com.mi.android.globalFileexplorer"
     "com.miui.weather2"
-    #"com.android.providers.downloads.ui"
+    "com.miui.bugreport"
+    "com.miui.gallery"
+    "com.android.providers.downloads.ui"
+    "com.xiaomi.scanner"
+    "com.mi.android.globalminusscreen"
+    "com.google.android.apps.genie.geniewidget"
 
     # Фигня от Honor
     "com.hihonor.game.kitserver"
@@ -327,7 +409,7 @@ failed=0
 not_installed=0
 
 echo "=========================================="
-echo "Удаление ненужных приложений v 0.3.8 Beta"
+echo "Удаление ненужных приложений v 0.3.9 Beta"
 echo "Всего приложений для удаления: $total"
 #echo "Сохранять данные приложений: $KEEP_DATA"
 echo "=========================================="
