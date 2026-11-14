@@ -276,7 +276,7 @@ apps=(
     "com.miui.yellowpage"
     "com.xiaomi.midrop"
     "com.miui.userguide"
-    "com.miui.miwallpaper"
+    #"com.miui.miwallpaper" # Обои
     "com.miui.touchassistant"
     "com.xiaomi.powerchecker"
     "com.miui.freeform"
@@ -409,7 +409,7 @@ failed=0
 not_installed=0
 
 echo "=========================================="
-echo "Удаление ненужных приложений v 0.3.9 Beta"
+echo "Удаление ненужных приложений v0.3.10 Beta"
 echo "Всего приложений для удаления: $total"
 #echo "Сохранять данные приложений: $KEEP_DATA"
 echo "=========================================="
