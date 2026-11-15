@@ -259,7 +259,6 @@ apps=(
     "com.swiftkey.swiftkeyconfigurator"
     "com.swiftkey.languageprovider"
     "org.pocketworkstation.pckeyboard"
-    "com.amaze.filemanager"
     "cn.wps.xiaomi.abroad.lite"
     "systems.sieber.vscreensaver"
     "com.github.cvzi.screenshottile"
@@ -308,7 +307,7 @@ apps=(
     "com.google.android.printservice.recommendation"
     "com.google.android.partnersetup"
     "com.android.dreams.phototable"
-    "com.android.wallpaper.livepicker"
+    #"com.android.wallpaper.livepicker"
 
     "com.miui.notes"
     "com.miui.videoplayer"
@@ -409,7 +408,7 @@ failed=0
 not_installed=0
 
 echo "=========================================="
-echo "Удаление ненужных приложений v0.3.10 Beta"
+echo "Удаление ненужных приложений v0.3.11 Beta"
 echo "Всего приложений для удаления: $total"
 #echo "Сохранять данные приложений: $KEEP_DATA"
 echo "=========================================="
