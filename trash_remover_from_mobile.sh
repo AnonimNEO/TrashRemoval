@@ -4,7 +4,8 @@ apps=(
     "com.android.emergency"
 
     "com.google.android.as"
-    "com.google.android.setupwizard"
+    "com.google.android.setupwizard" # первоначальная настройка
+    "com.android.provision" # первоначальная настройка
     "com.google.android.apps.assistant"
     "com.google.android.speech.recognition.api"
     "com.google.android.apps.work.oobconfig"
@@ -16,6 +17,10 @@ apps=(
     "com.facebook.katana"
 
     # Google (реклама и отслеживание)
+    "com.android.location.fused" # GPS
+    "com.google.android.gsf" # Google Services Framework
+    "com.google.android.gsf.login" # Вход в аккаунт гугл
+    "com.google.android.tts" # Синтез речи гугл
     "com.google.android.apps.wellbeing"
     "com.google.android.feedback"
     "com.google.android.apps.searchlite"
@@ -325,6 +330,32 @@ apps=(
     "com.xiaomi.scanner"
     "com.mi.android.globalminusscreen"
     "com.google.android.apps.genie.geniewidget"
+    "com.mi.dlabs.vr" # vr очки
+    "com.android.wallpaperbackup"
+    "com.xiaomi.bluetooth"
+    "com.miui.cloudservice.sysbase"
+    "com.xiaomi.finddevice"
+    "com.xiaomi.upnp" # поиск умных устройств
+    "com.xiaomi.location.fused" # GPS
+    "com.miui.backup"
+    "com.miui.micloudsync"
+    "com.xiaomi.payment"
+    "com.xiaomi.micloud.sdk"
+    "com.xiaomi.mi_connect_service"
+    "com.xiaomi.account"
+    "com.xiaomi.miplay_client"
+    "com.milink.service"
+
+    # Супер системный мусор
+    "com.miui.home"
+    "com.miui.miwallpaper"
+    "com.google.android.inputmethod.latin"
+    "com.xiaomi.xmsf" # xiomi Framework
+    "com.miui.securitycore" # Ядро Безопасность xiomi
+    "com.miui.securitycenter" # Безопасность
+    "com.miui.securityadd" # добавка к безопасности
+    "com.mi.webkit.core"
+    "android.autoinstalls.config.Xiaomi.santoni"
 
     # Фигня от Honor
     "com.hihonor.game.kitserver"
@@ -383,6 +414,9 @@ if [ "$1" == "-h" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" == "--
     exit 0
 fi
 
+read -r -p "!ВНИМАНИЕ!\n\nДанный скрипт удалит все указанные приложения в нём без суда и следствия!\nПеред использованием рекоендуется его открыть и закоментировать нужные вам приложения.\nВы хотите продолжить? (y/N)? " answer
+[[ "$answer" =~ ^[Yy]$ ]] || exit 0
+
 # Проверка установки adb
 if ! command -v adb &> /dev/null; then
     echo "[!] Ошибка - Установите Android SDK Platform Tools (adb)"
@@ -408,7 +442,7 @@ failed=0
 not_installed=0
 
 echo "=========================================="
-echo "Удаление ненужных приложений v0.3.11 Beta"
+echo "Удаление ненужных приложений v0.4.3 Beta"
 echo "Всего приложений для удаления: $total"
 #echo "Сохранять данные приложений: $KEEP_DATA"
 echo "=========================================="
