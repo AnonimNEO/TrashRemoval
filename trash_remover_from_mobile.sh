@@ -1,6 +1,8 @@
 #!/bin/bash
 
 apps=(
+    "com.google.android.inputmethod.pinyin" # Китайская Клавиатура
+
     "com.android.emergency"
 
     "com.google.android.as"
@@ -311,7 +313,25 @@ apps=(
     "com.google.android.printservice.recommendation"
     "com.google.android.partnersetup"
     "com.android.dreams.phototable"
-    #"com.android.wallpaper.livepicker"
+    "com.android.wallpaper.livepicker"
+    #"com.android.backupconfirm"
+    #"com.android.sharedstoragebackup"
+    #"com.android.calllogbackup"
+    "com.android.providers.partnerbookmarks"
+    "com.android.bookmarkprovider"
+    "com.qualcomm.qti.StatsPollManager"
+    "com.qti.qualcomm.datastatusnotification"
+    #"com.logger.app"
+    "com.google.android.onetimeinitializer"
+    #"com.google.android.configupdater"
+    #"com.google.android.ext.services"
+    #"com.google.android.ext.shared"
+    "com.android.printspooler" # Печать
+    "com.qualcomm.uimremoteclient"
+    "com.qualcomm.location" # GPS
+    "com.fido.xiaomi.uafclient"
+    "com.miui.guardprovider"
+    "com.mipay.wallet.id"
 
     "com.miui.notes"
     "com.miui.videoplayer"
@@ -442,7 +462,7 @@ failed=0
 not_installed=0
 
 echo "=========================================="
-echo "Удаление ненужных приложений v0.4.4 Beta"
+echo "Удаление ненужных приложений v0.4.5 Beta"
 echo "Всего приложений для удаления: $total"
 #echo "Сохранять данные приложений: $KEEP_DATA"
 echo "=========================================="
